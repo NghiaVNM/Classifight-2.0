@@ -201,7 +201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &358401853
 Transform:
   m_ObjectHideFlags: 0
@@ -898,7 +898,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 952166229}
-    PlayerPrefab: {fileID: 3380383900558517059, guid: 8bb98d6baa4d63d479a858561ce41563, type: 3}
+    PlayerPrefab: {fileID: 859199738713853579, guid: 9833cf9823eea34498e425445f9c30a7, type: 3}
     NetworkPrefabs: []
     TickRate: 30
     ClientConnectionBufferTimeout: 10
@@ -981,7 +981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebdbc761d0fb044a8faf03e72861e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chat: {fileID: 358401852}
   hostBtn: {fileID: 2019285561}
   clientBtn: {fileID: 1381017031}
 --- !u!1 &1381017029
