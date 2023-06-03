@@ -2662,6 +2662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2347752708495995015}
   - component: {fileID: 2347752708495995014}
+  - component: {fileID: -4424930898003011854}
   m_Layer: 0
   m_Name: Backgrounds
   m_TagString: Untagged
@@ -2699,6 +2700,22 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &-4424930898003011854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347752708495995013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2347752708843018163
 GameObject:
   m_ObjectHideFlags: 0
