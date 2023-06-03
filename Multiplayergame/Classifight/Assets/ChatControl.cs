@@ -22,7 +22,7 @@ public class ChatControl : NetworkBehaviour
         show_Message.text += $"{message}\n";
     }
 
-    // Call this method when the send button is clicked or Enter key is pressed
+    // Call this method when the send button is clicked or Enter key is pressed // fuck
     public void SendButtonClicked()
     {
         if (input.text.Trim() == string.Empty)
