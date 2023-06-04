@@ -13,6 +13,7 @@ public class PlayerNetwork : NetworkBehaviour
     private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback, jumpingback}
     private Animator anim;
     private bool checkJump = false;
+    private bool right = true;
 
     private void Start()
     {
@@ -30,28 +31,38 @@ public class PlayerNetwork : NetworkBehaviour
         checkJump = (Input.GetKeyDown(KeyCode.W));
         if (checkJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 7f);
-            state = MovementState.jumping;
+            rb.velocity = new Vector2(rb.velocity.x, 15f);
+            if (right)
+                state = MovementState.jumping;
+            else
+                state = MovementState.jumpingback;
         }
         else 
         {
             if (dirX > 0f)
             {
-                sprite.flipX = false;
-                state = MovementState.running;
+                    state = MovementState.running;
+                    right = true;
             }
             else if (dirX < 0f)
             {
-                sprite.flipX = true;
                 state = MovementState.back;
+                right = false;
             }
             else
             {
-                state = MovementState.idle;
+                if (right)
+                    state = MovementState.idle;
+                else
+                    state = MovementState.idleback;
             }
+
             if (Input.GetKey(KeyCode.J))
             {
-                state = MovementState.attacking;
+                if (right)
+                    state = MovementState.attacking;
+                else
+                    state = MovementState.attackingback;
             } 
         }
         anim.SetInteger("state", (int)state);
