@@ -12,6 +12,7 @@ public class PlayerNetwork : NetworkBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private MovementState state;
+    public float jumpForce = 0f;
     private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback, jumpingback }
     private bool checkJump = false;
     public Transform attackPoint;
@@ -58,7 +59,7 @@ public class PlayerNetwork : NetworkBehaviour
         checkJump = Input.GetKeyDown(KeyCode.W);
         if (checkJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 7f);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             state = MovementState.jumping;
         }
         else
