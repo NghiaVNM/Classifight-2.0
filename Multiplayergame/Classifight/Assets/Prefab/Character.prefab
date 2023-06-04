@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   moveSpeed: 4
+  jumpForce: 30
   attackPoint: {fileID: 443699393137714367}
   enemyLayers:
     serializedVersion: 2
