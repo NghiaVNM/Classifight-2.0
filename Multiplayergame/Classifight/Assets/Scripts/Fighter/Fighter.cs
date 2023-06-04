@@ -15,27 +15,40 @@ public class Fighter : MonoBehaviour
     public Fighter opponent;
 
     public PlayerType player;
-    public FighterState currentState = FighterState.Idel;
+    public FighterState currentState = FighterState.Idle;
 
     protected Animator animator;
     private Rigidbody2D myBody;
+    private SpriteRenderer sprite;
 
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     public void UpdateHumanInput() 
     {
         // fix
-        if (Input.GetAxis("Horizontal") > 0.1 || Input.GetAxis("Horizontal") < -0.1)
+        if (Input.GetAxis("Horizontal") > 0.1)
         {
+            sprite.flipX = false;
             animator.SetBool("Walk", true);
         }
         else
         {
             animator.SetBool("Walk", false);
+        }
+
+         if (Input.GetAxis("Horizontal") < -0.1)
+        {
+            sprite.flipX = true;
+            animator.SetBool("WalkBack", true);
+        }
+        else
+        {
+            animator.SetBool("WalkBack", false);
         }
 
         if (Input.GetKeyDown(KeyCode.W))

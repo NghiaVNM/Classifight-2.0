@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum FighterState
 {
-    Idel, Walk, Jump, Attack, TakeHit, Win, KnockOut, None
+    Idle, Walk, WalkBack, Jump, Attack, TakeHit, Win, KnockOut, None
 }
