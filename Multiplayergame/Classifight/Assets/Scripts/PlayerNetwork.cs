@@ -17,18 +17,22 @@ public class PlayerNetwork : NetworkBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     public float attackRange = 0.5f;
-    public int attackDamage = 20;
+    public float attackDamage = 20f;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
     public GameObject hitBox;
-
+    private bool isFlipped = false; // Biến để theo dõi trạng thái quay của nhân vật
+    private Vector3 hitBoxOriginalPosition;
     private void Start()
     {
         currentHealth = 100;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-        hitBox = GameObject.FindGameObjectWithTag("attackpoint");
+        if (hitBox != null)
+        {
+            hitBoxOriginalPosition = hitBox.transform.localPosition;
+        }
     }
 
     private void Update()
@@ -101,7 +105,7 @@ public class PlayerNetwork : NetworkBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
@@ -136,7 +140,7 @@ public class PlayerNetwork : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcTakeDamageClientRpc(int damage)
+    private void RpcTakeDamageClientRpc(float damage)
     {
         TakeDamage(damage);
     }
@@ -151,7 +155,32 @@ public class PlayerNetwork : NetworkBehaviour
     [ClientRpc]
     private void RpcFlipClientRpc(bool flipX)
     {
-        sprite.flipX = flipX; 
+        if (flipX)
+        {
+            if (!isFlipped) // Kiểm tra nếu trạng thái quay mới là quay sang trái
+            {
+                isFlipped = true;
+                sprite.flipX = true;
+                if (hitBox != null)
+                {
+                    // Đảo ngược vị trí của hit box
+                    hitBox.transform.localPosition = new Vector3(-hitBox.transform.localPosition.x, hitBox.transform.localPosition.y, hitBox.transform.localPosition.z);
+                }
+            }
+        }
+        else
+        {
+            if (isFlipped) // Kiểm tra nếu trạng thái quay mới là quay sang phải (hướng ban đầu)
+            {
+                isFlipped = false;
+                sprite.flipX = false;
+                if (hitBox != null)
+                {
+                    // Đặt lại vị trí ban đầu của hit box
+                    hitBox.transform.localPosition = hitBoxOriginalPosition;
+                }
+            }
+        }
     }
     void OnDrawGizmosSelected()
     {

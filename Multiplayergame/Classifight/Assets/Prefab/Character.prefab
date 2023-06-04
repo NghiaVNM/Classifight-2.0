@@ -148,16 +148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e14a3ef4cd049f4a9dddedc9b9a2731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  currentHealth: 100
   moveSpeed: 4
   attackPoint: {fileID: 443699393137714367}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
   attackRange: 0.5
-  attackDamage: 20
+  attackDamage: 3.5
   attackRate: 2
-  hitBox: {fileID: 0}
+  hitBox: {fileID: 6616620521213583040}
 --- !u!114 &4676233820923448651
 MonoBehaviour:
   m_ObjectHideFlags: 0
