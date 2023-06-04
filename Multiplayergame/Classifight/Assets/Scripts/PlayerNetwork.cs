@@ -10,7 +10,7 @@ public class PlayerNetwork : NetworkBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private MovementState state;
-    private enum MovementState { idle, running, jumping, attacking, back}
+    private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback}
     private Animator anim;
     private bool checkJump = false;
 
