@@ -20,7 +20,7 @@ public class PlayerNetwork : NetworkBehaviour
     public int attackDamage = 20;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
-
+    public GameObject hitBox;
     private void Start()
     {
         currentHealth = 100;
@@ -84,7 +84,6 @@ public class PlayerNetwork : NetworkBehaviour
     }
     void Attack()
     {
-
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D hitCollider in hitColliders)
@@ -151,5 +150,16 @@ public class PlayerNetwork : NetworkBehaviour
     private void RpcFlipClientRpc(bool flipX)
     {
         sprite.flipX = flipX;
+        if (hitBox != null)
+        {
+            // Đảo ngược hướng của hit box
+            hitBox.transform.localScale = new Vector3(flipX ? -1f : 1f, 1f, 1f);
+        }
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        { return; }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
