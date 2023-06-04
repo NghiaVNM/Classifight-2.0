@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,8 +13,6 @@ public class PlayerNetwork : NetworkBehaviour
     private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback, jumpingback}
     private Animator anim;
     private bool checkJump = false;
-    private bool right = true;
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,41 +29,42 @@ public class PlayerNetwork : NetworkBehaviour
         checkJump = (Input.GetKeyDown(KeyCode.W));
         if (checkJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 15f);
-            if (right)
-                state = MovementState.jumping;
-            else
-                state = MovementState.jumpingback;
+            rb.velocity = new Vector2(rb.velocity.x, 7f);
+            state = MovementState.jumping;
         }
         else 
         {
             if (dirX > 0f)
             {
-                    state = MovementState.running;
-                    right = true;
+                state = MovementState.running;
+                ServerFlipServerRpc(false);
             }
             else if (dirX < 0f)
             {
-                state = MovementState.back;
-                right = false;
+                state = MovementState.running;
+                ServerFlipServerRpc(true);
             }
             else
             {
-                if (right)
-                    state = MovementState.idle;
-                else
-                    state = MovementState.idleback;
+                state = MovementState.idle;
             }
-
             if (Input.GetKey(KeyCode.J))
             {
-                if (right)
-                    state = MovementState.attacking;
-                else
-                    state = MovementState.attackingback;
+                state = MovementState.attacking;
             } 
         }
         anim.SetInteger("state", (int)state);
     }
 
+    [ServerRpc]
+    private void ServerFlipServerRpc(bool flipX)
+    {
+        RpcFlipClientRpc(flipX);
+    }
+
+    [ClientRpc]
+    private void RpcFlipClientRpc(bool flipX)
+    {
+        sprite.flipX = flipX;
+    }
 }
