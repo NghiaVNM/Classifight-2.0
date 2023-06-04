@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    public float currentHeal;
+    public float currentHealth;
     private Animator animator;
     public float moveSpeed = 4f;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private MovementState state;
-    private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback, jumpingback}
+    private enum MovementState { idle, running, jumping, attacking, back, idleback, attackingback, jumpingback }
     private bool checkJump = false;
     public Transform attackPoint;
     public LayerMask enemyLayers;
@@ -20,9 +20,10 @@ public class PlayerNetwork : NetworkBehaviour
     public int attackDamage = 20;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+
     private void Start()
     {
-        currentHeal = 100;
+        currentHealth = 100;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -31,19 +32,23 @@ public class PlayerNetwork : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
-        if (currentHeal <= 0) {
+
+        if (currentHealth <= 0)
+        {
             Die();
             return;
         }
+
         float dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
-        checkJump = (Input.GetKeyDown(KeyCode.W));
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+
+        checkJump = Input.GetKeyDown(KeyCode.W);
         if (checkJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, 7f);
             state = MovementState.jumping;
         }
-        else 
+        else
         {
             if (dirX > 0f)
             {
@@ -59,53 +64,77 @@ public class PlayerNetwork : NetworkBehaviour
             {
                 state = MovementState.idle;
             }
+
             if (Input.GetKey(KeyCode.J))
             {
                 state = MovementState.attacking;
-            } 
+            }
         }
+
         animator.SetInteger("state", (int)state);
 
-        if(Time.time >= nextAttackTime) 
+        if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                Attack();
-                nextAttackTime=Time.time+1f/attackRate;
+                ServerAttackServerRpc();
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
 
-    void Attack()
+    public void Attack()
     {
+        if (!IsOwner) return;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
     }
 
-    /*
     public void TakeDamage(int damage)
     {
-        if (IsOwner) return;
+        if (!IsOwner) return;
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
-        if (currentHealth <= 0) 
+
+        if (currentHealth <= 0)
         {
             Die();
         }
-    }*/
+    }
+
     async void Die()
     {
-        Debug.Log("Enemy Died");
+        Debug.Log("Player Died");
         animator.SetTrigger("Hurt");
         animator.SetBool("isDead", true);
         await Task.Delay(500);
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
-        
     }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        { return; }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    [ServerRpc]
+    private void ServerAttackServerRpc()
+    {
+         Attack();
+         RpcAttackClientRpc();
+    }
+
+    [ClientRpc]
+    private void RpcAttackClientRpc()
+    {
+         TakeDamage(attackDamage);
+    }
+
     [ServerRpc]
     private void ServerFlipServerRpc(bool flipX)
     {
