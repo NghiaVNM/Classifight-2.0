@@ -347,6 +347,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   slider: {fileID: 6725601587321647611}
   fill: {fileID: 6725601588115848381}
+  player: {fileID: 7362476503867346018}
 --- !u!114 &6725601587321647609
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,13 +10,18 @@ public class HealthBar : NetworkBehaviour
     public Gradient gradient;
     public Slider slider;
     public Image fill;
+    public PlayerNetwork player;
+
+    void Update() {
+        SetHealth(player.currentHealth);
+    }
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
         slider.value = health;
         fill.color = gradient.Evaluate(1f);
     }
-    public void SetHealth(int health) 
+    public void SetHealth(float health) 
     {
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
