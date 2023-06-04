@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
@@ -82,20 +82,26 @@ public class PlayerNetwork : NetworkBehaviour
             }
         }
     }
-
-    public void Attack()
+    void Attack()
     {
-        if (!IsOwner) return;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D hitCollider in hitColliders)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            if (hitCollider.TryGetComponent<PlayerNetwork>(out PlayerNetwork playerNetwork))
+            {
+                if (playerNetwork.IsOwner)
+                {
+                    playerNetwork.TakeDamage(attackDamage);
+                    playerNetwork.RpcTakeDamageClientRpc(attackDamage);
+                }
+            }
         }
     }
 
     public void TakeDamage(int damage)
     {
-        if (!IsOwner) return;
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
 
@@ -115,25 +121,25 @@ public class PlayerNetwork : NetworkBehaviour
         this.enabled = false;
     }
 
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-        { return; }
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
     [ServerRpc]
     private void ServerAttackServerRpc()
     {
-         Attack();
-         RpcAttackClientRpc();
+        Attack();
+        RpcAttackClientRpc();
     }
 
     [ClientRpc]
     private void RpcAttackClientRpc()
     {
-         TakeDamage(attackDamage);
+        Attack();
     }
+
+    [ClientRpc]
+    private void RpcTakeDamageClientRpc(int damage)
+    {
+        TakeDamage(damage);
+    }
+
 
     [ServerRpc]
     private void ServerFlipServerRpc(bool flipX)
