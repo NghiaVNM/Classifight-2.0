@@ -21,9 +21,11 @@ public class PlayerNetwork : NetworkBehaviour
     public float attackDamage = 20f;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+    public LayerMask jumableGround;
     public GameObject hitBox;
     private bool isFlipped = false; // Biến để theo dõi trạng thái quay của nhân vật
     private Vector3 hitBoxOriginalPosition;
+    private BoxCollider2D boxColl;
     private void Start()
     {
         if (IsServer)
@@ -37,6 +39,7 @@ public class PlayerNetwork : NetworkBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        boxColl = GetComponent<BoxCollider2D>();
         if (hitBox != null)
         {
             hitBoxOriginalPosition = hitBox.transform.localPosition;
@@ -57,7 +60,7 @@ public class PlayerNetwork : NetworkBehaviour
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         checkJump = Input.GetKeyDown(KeyCode.W);
-        if (checkJump)
+        if (checkJump&&IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             state = MovementState.jumping;
@@ -95,6 +98,10 @@ public class PlayerNetwork : NetworkBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
+    }
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(boxColl.bounds.center, boxColl.bounds.size, 0f, Vector2.down, .1f, jumableGround);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {

@@ -822,6 +822,9 @@ MonoBehaviour:
   attackRange: 0.5
   attackDamage: 20
   attackRate: 2
+  jumableGround:
+    serializedVersion: 2
+    m_Bits: 128
   hitBox: {fileID: 9014906779353341928}
 --- !u!114 &7362476503867346019
 MonoBehaviour:
