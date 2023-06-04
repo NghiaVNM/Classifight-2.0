@@ -15,6 +15,7 @@ public class Fighter : MonoBehaviour
     public Fighter opponent;
 
     public PlayerType player;
+    public FighterState currentState = FighterState.Idel;
 
     protected Animator animator;
     private Rigidbody2D myBody;
