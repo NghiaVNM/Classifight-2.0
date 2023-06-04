@@ -25,6 +25,13 @@ public class PlayerNetwork : NetworkBehaviour
     private Vector3 hitBoxOriginalPosition;
     private void Start()
     {
+        if (IsServer)
+            transform.position = new Vector3 (-7, 0, 0);
+        else {
+            transform.position = new Vector3 (7, 0, 0);
+            ServerFlipServerRpc(true);
+        }
+            
         currentHealth = 100;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
