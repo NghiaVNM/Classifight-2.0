@@ -7,7 +7,6 @@ public class Enemy : NetworkBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    public HealthBar healthBar;
     public Animator animator;
 
     void Start()
@@ -17,8 +16,8 @@ public class Enemy : NetworkBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (IsOwner) return;
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
         animator.SetTrigger("Hurt");
         if (currentHealth <= 0) 
         {
