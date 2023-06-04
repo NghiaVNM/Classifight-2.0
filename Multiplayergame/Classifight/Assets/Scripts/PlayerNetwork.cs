@@ -37,13 +37,13 @@ public class PlayerNetwork : NetworkBehaviour
         {
             if (dirX > 0f)
             {
-                state = MovementState.running;
                 sprite.flipX = false;
+                state = MovementState.running;
             }
             else if (dirX < 0f)
             {
-                state = MovementState.running;
                 sprite.flipX = true;
+                state = MovementState.back;
             }
             else
             {
