@@ -96,6 +96,13 @@ public class PlayerNetwork : NetworkBehaviour
             }
         }
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("fallout"))
+        {
+            Die();
+        }
+    }
     void Attack()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
