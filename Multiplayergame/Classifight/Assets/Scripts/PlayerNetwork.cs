@@ -111,11 +111,7 @@ public class PlayerNetwork : NetworkBehaviour
         {
             if (hitCollider.TryGetComponent<PlayerNetwork>(out PlayerNetwork playerNetwork))
             {
-                if (playerNetwork.IsOwner)
-                {
-                    playerNetwork.TakeDamage(attackDamage);
-                    playerNetwork.RpcTakeDamageClientRpc(attackDamage);
-                }
+                 playerNetwork.RpcTakeDamageClientRpc(attackDamage);
             }
         }
     }
@@ -143,13 +139,6 @@ public class PlayerNetwork : NetworkBehaviour
 
     [ServerRpc]
     private void ServerAttackServerRpc()
-    {
-        Attack();
-        RpcAttackClientRpc();
-    }
-
-    [ClientRpc]
-    private void RpcAttackClientRpc()
     {
         Attack();
     }
