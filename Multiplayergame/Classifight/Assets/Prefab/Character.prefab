@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1451049037551956220}
   - component: {fileID: 2793277750096933982}
   - component: {fileID: 6428299284102863924}
+  - component: {fileID: -7816034159767132332}
   m_Layer: 8
   m_Name: Character
   m_TagString: Untagged
@@ -280,3 +281,17 @@ MonoBehaviour:
   currentHealth: 0
   healthBar: {fileID: 0}
   animator: {fileID: 4676233820923448693}
+--- !u!114 &-7816034159767132332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676233820923448653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fc97c1b28e5c944806a68bf793a7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 4676233820923448693}
