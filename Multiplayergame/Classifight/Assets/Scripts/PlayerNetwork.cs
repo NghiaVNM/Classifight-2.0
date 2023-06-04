@@ -21,12 +21,14 @@ public class PlayerNetwork : NetworkBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
     public GameObject hitBox;
+
     private void Start()
     {
         currentHealth = 100;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        hitBox = GameObject.FindGameObjectWithTag("attackpoint");
     }
 
     private void Update()
@@ -149,12 +151,7 @@ public class PlayerNetwork : NetworkBehaviour
     [ClientRpc]
     private void RpcFlipClientRpc(bool flipX)
     {
-        sprite.flipX = flipX;
-        if (hitBox != null)
-        {
-            // Đảo ngược hướng của hit box
-            hitBox.transform.localScale = new Vector3(flipX ? -1f : 1f, 1f, 1f);
-        }
+        sprite.flipX = flipX; 
     }
     void OnDrawGizmosSelected()
     {
