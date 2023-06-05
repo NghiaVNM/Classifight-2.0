@@ -49,4 +49,9 @@ public class ButtonScript : MonoBehaviour
         
         SceneManager.LoadScene("ChooseMap");
     }
+
+    public void con()
+    {
+        ui.ConnectToServer();
+    }
 }
