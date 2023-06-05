@@ -1,0 +1,10 @@
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\bin\Debug\GameServer.exe.config
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\bin\Debug\GameServer.exe
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\bin\Debug\GameServer.pdb
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.dll
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.xml
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.AssemblyReference.cache
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.CopyComplete
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.exe
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.pdb
