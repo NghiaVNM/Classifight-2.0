@@ -109,9 +109,10 @@ public class PlayerNetwork : NetworkBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if(!IsOwner) return;
         if (collision.gameObject.CompareTag("fallout"))
         {
-            TakeDamage(100);
+            TakeDamageServerRpc(200);
         }
     }
     void Attack()
@@ -170,6 +171,12 @@ public class PlayerNetwork : NetworkBehaviour
     private void AttackServerRpc()
     {
         Attack();
+    }
+
+    [ServerRpc]
+    private void TakeDamageServerRpc(float damage)
+    {
+        TakeDamageClientRpc(damage);
     }
 
     [ClientRpc]
