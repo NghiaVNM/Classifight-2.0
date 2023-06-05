@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -14,5 +15,21 @@ public class ButtonScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Training() {
+        SceneManager.LoadScene("TrainingScene");
+    }
+
+    public void Setting() {
+        SceneManager.LoadScene("SettingMenu");
+    }
+
+    public void Menu() {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void SignIn() {
+        SceneManager.LoadScene("LoginScenes");
     }
 }
