@@ -111,7 +111,7 @@ public class PlayerNetwork : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("fallout"))
         {
-            Die();
+            TakeDamage(100);
         }
     }
     void Attack()
