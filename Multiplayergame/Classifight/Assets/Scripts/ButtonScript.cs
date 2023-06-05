@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
+    static bool connect = false;
+    public UIManager ui;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,11 @@ public class ButtonScript : MonoBehaviour
     }
 
     public void ChoosingMap() {
+        if (!connect)
+        {
+            ui.ConnectToServer();
+            connect = true;
+        }
         SceneManager.LoadScene("ChooseMap");
     }
 }

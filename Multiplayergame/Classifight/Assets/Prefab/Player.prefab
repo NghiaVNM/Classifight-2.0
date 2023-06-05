@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4043940331360401452}
   - component: {fileID: 4043940331360401443}
   - component: {fileID: 7989270091641356519}
+  - component: {fileID: 2077529553996059945}
   - component: {fileID: 4307587267341827821}
   - component: {fileID: -6861454400390008805}
   m_Layer: 0
@@ -107,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   moveSpeed: 3
+  jumpForce: 0
   attackPoint: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
@@ -114,7 +116,27 @@ MonoBehaviour:
   attackRange: 0.5
   attackDamage: 20
   attackRate: 2
+  jumableGround:
+    serializedVersion: 2
+    m_Bits: 0
   hitBox: {fileID: 0}
+  jumpSoundEffect: {fileID: 0}
+  deathSoundEffect: {fileID: 0}
+  moveSoundEffect: {fileID: 0}
+  attackSoundEffect: {fileID: 0}
+  hurtEffect: {fileID: 0}
+--- !u!114 &2077529553996059945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043940331360401454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0ca4cd2ae48b4419b0442e2a515862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4307587267341827821
 MonoBehaviour:
   m_ObjectHideFlags: 0

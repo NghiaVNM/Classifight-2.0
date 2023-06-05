@@ -8,3 +8,4 @@ D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.Cor
 D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.CopyComplete
 D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.exe
 D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.pdb
+D:\Gifthub\Classifight-2.0\GameServer\GameServer\obj\Debug\GameServer.csproj.SuggestedBindingRedirects.cache
