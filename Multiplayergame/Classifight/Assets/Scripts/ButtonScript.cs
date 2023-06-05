@@ -41,7 +41,7 @@ public class ButtonScript : MonoBehaviour
     }
 
     public void SkyBlock() {
-        ButtonSoundEffect.Play();
+        ButtonSoundEffect.Play();//
         SceneManager.LoadScene("SkyBlock");
     }
 
