@@ -9,6 +9,9 @@ public class Enemytrain : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar1 healthBar;
+    [SerializeField] private AudioSource soundHurt;
+    [SerializeField] private AudioSource soundDie;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,6 +23,7 @@ public class Enemytrain : MonoBehaviour
 
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        soundHurt.Play();
         animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
         {
@@ -28,7 +32,7 @@ public class Enemytrain : MonoBehaviour
     }
     void Die()
     {
-        Debug.Log("chet");
+        soundDie.Play();
         animator.SetBool("IsDeath", true);
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;

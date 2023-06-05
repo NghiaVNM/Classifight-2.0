@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private bool checkJump = false;
     private bool checkAttack = false;
     private MovementState state;
+    [SerializeField] private AudioSource soundMoving;
+    [SerializeField] private AudioSource soundAttack;
+    [SerializeField] private AudioSource soundJump;
+
     private enum MovementState { idle, running, jumping, attacking, jmpattacking }
     // Start is called before the first frame update
     void Start()
@@ -38,10 +42,12 @@ public class PlayerMovement : MonoBehaviour
             rg.velocity = new Vector2(dirX * rg.velocity.x, JumpForce);
             if (checkAttack)
             {
+                soundJump.Play();
                 state = MovementState.jmpattacking;
             }
             else
             {
+                soundJump.Play();
                 state = MovementState.jumping;
             }
         }
@@ -50,11 +56,14 @@ public class PlayerMovement : MonoBehaviour
             if (checkAttack)
             {
                 if (IsGrounded())
-                {
+                { 
+                    soundAttack.Play();
                     state = MovementState.attacking;
                 }
                 else
-                {
+                {   
+                    soundAttack.Play();
+                    soundJump.Play();
                     state = MovementState.jmpattacking;
                 }
             }
@@ -70,15 +79,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
+            soundAttack.Play();
             state = MovementState.attacking;
         }
         if (dirX > 0f)
         {
+            soundMoving.Play();
             state = MovementState.running;
             sprite.flipX = false;
         }
         else if (dirX < 0f)
         {
+            soundMoving.Play(); 
             state = MovementState.running;
             sprite.flipX = true;
         }

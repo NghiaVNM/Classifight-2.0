@@ -16,6 +16,7 @@ public class RegisterLogin : MonoBehaviour
     [SerializeField] private InputField accountPassword;
     [SerializeField] private InputField accountConfirmPassword;
     [SerializeField] private Text info;
+    [SerializeField] private AudioSource butonCLick;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +44,13 @@ public class RegisterLogin : MonoBehaviour
 
     public void RegisterEvent()
     {
+        butonCLick.Play();
         SceneManager.LoadScene("RegisterScenes");
     }
     
     public void LoginEvent()
     {
+        butonCLick.Play();
         SceneManager.LoadScene("LoginScenes");
     }
     IEnumerator RegisterNewAccount(string uName, string pWord, string cfpWord)

@@ -7,15 +7,18 @@ public class NetworkManagerUI : MonoBehaviour
 {
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+    [SerializeField] private AudioSource soundBtn;
 
     private void Awake()
     {
         hostBtn.onClick.AddListener(() =>
-        {
+        {   
+            soundBtn.Play();
             NetworkManager.Singleton.StartHost();
         });
         clientBtn.onClick.AddListener(() =>
         {
+            soundBtn.Play();
             NetworkManager.Singleton.StartClient();
         });
     }
