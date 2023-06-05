@@ -36,12 +36,13 @@ public class PlayerNetwork : NetworkBehaviour
     private void Start()
     {
         if (IsServer)
-            transform.position = new Vector3 (-7, 0, 0);
-        else {
-            transform.position = new Vector3 (7, 0, 0);
+            transform.position = new Vector3(-7, 0, 0);
+        else
+        {
+            transform.position = new Vector3(7, 0, 0);
             ServerFlipServerRpc(true);
         }
-            
+
         currentHealth = 100;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -52,26 +53,14 @@ public class PlayerNetwork : NetworkBehaviour
             hitBoxOriginalPosition = hitBox.transform.localPosition;
         }
     }
-
     private void Update()
     {
-        if (!IsOwner) {
-            if (currentHealth <= 0)
-                SceneManager.LoadScene("Win");
-            return;
-        } 
-
-        if (currentHealth <= 0)
-        {
-            Die();
-            return;
-        }
-
+        if(!IsOwner) return;
         float dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         checkJump = Input.GetKeyDown(KeyCode.W);
-        if (checkJump&&IsGrounded())
+        if (checkJump && IsGrounded())
         {
             jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -107,9 +96,9 @@ public class PlayerNetwork : NetworkBehaviour
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.J))
-            {   
+            {
                 attackSoundEffect.Play();
-                ServerAttackServerRpc();
+                AttackServerRpc();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
@@ -133,7 +122,7 @@ public class PlayerNetwork : NetworkBehaviour
         {
             if (hitCollider.TryGetComponent<PlayerNetwork>(out PlayerNetwork playerNetwork))
             {
-                 playerNetwork.RpcTakeDamageClientRpc(attackDamage);
+                playerNetwork.TakeDamageClientRpc(attackDamage);
             }
         }
     }
@@ -145,7 +134,17 @@ public class PlayerNetwork : NetworkBehaviour
         hurtEffect.Play();
         if (currentHealth <= 0)
         {
-            Die();
+            Destroy(NetworkManager);
+            if (IsOwner)
+            {
+                DieClientRpc();
+            }
+            else
+            {
+                SceneManager.LoadScene("Win");
+                this.enabled = false;
+            }
+            
         }
     }
 
@@ -158,18 +157,23 @@ public class PlayerNetwork : NetworkBehaviour
         await Task.Delay(500);
         GetComponent<Collider2D>().enabled = false;
         await Task.Delay(500);
+        DieClientRpc();
+    }
+
+    [ClientRpc]
+    private void DieClientRpc()
+    {
         SceneManager.LoadScene("Lose");
         this.enabled = false;
     }
-
     [ServerRpc]
-    private void ServerAttackServerRpc()
+    private void AttackServerRpc()
     {
         Attack();
     }
 
     [ClientRpc]
-    private void RpcTakeDamageClientRpc(float damage)
+    private void TakeDamageClientRpc(float damage)
     {
         TakeDamage(damage);
     }
