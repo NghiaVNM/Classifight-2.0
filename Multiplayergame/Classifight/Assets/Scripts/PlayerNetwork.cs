@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerNetwork : NetworkBehaviour
 {
@@ -48,7 +49,11 @@ public class PlayerNetwork : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner) {
+            if (currentHealth <= 0)
+                SceneManager.LoadScene("Win");
+            return;
+        } 
 
         if (currentHealth <= 0)
         {
@@ -141,6 +146,8 @@ public class PlayerNetwork : NetworkBehaviour
         animator.SetBool("isDead", true);
         await Task.Delay(500);
         GetComponent<Collider2D>().enabled = false;
+        await Task.Delay(500);
+        SceneManager.LoadScene("Lose");
         this.enabled = false;
     }
 

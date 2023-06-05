@@ -32,4 +32,12 @@ public class ButtonScript : MonoBehaviour
     public void SignIn() {
         SceneManager.LoadScene("LoginScenes");
     }
+
+    public void SkyBlock() {
+        SceneManager.LoadScene("SkyBlock");
+    }
+
+    public void ChoosingMap() {
+        SceneManager.LoadScene("ChooseMap");
+    }
 }

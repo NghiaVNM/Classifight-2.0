@@ -15,8 +15,21 @@ EditorBuildSettings:
     path: Assets/Scenes/SettingMenu.unity
     guid: b4ba154793c7d9442b183d54daedebfa
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Scenes/MainScenes.unity
+=======
+    path: Assets/Scenes/SkyBlock.unity
+>>>>>>> Stashed changes
     guid: 649273c126fa505418da373bd65a1966
+  - enabled: 1
+    path: Assets/Scenes/ChooseMap.unity
+    guid: 030eedfa0b196a246b16ff54d5397f28
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: 03fb4573c1df5bb4ca422869fb5eecc6
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: cf76ad3be5e0d9a4ab40ee484fd82e07
   - enabled: 0
     path: Assets/Scenes/LoginScenes.unity
     guid: 7653484ed99c06c478867d56a7d5cd1b
