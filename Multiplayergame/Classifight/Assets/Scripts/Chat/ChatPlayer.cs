@@ -13,7 +13,7 @@ public class ChatPlayer : NetworkBehaviour
         if (IsLocalPlayer)
         {
             base.OnNetworkSpawn();
-            AddChatServerRpc("Player " + OwnerClientId + " joined the chat");
+            AddChatServerRpc("Player " + (OwnerClientId + 1) + " joined the chat");
             inputField = ChatManager.instance.inputField;
             inputField.onSubmit.AddListener(SendMessageFromUI);
         }
@@ -22,7 +22,7 @@ public class ChatPlayer : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        AddChatServerRpc("Player " + OwnerClientId + " left the chat");
+        AddChatServerRpc("Player " + (OwnerClientId + 1) + " left the chat");
     }
 
     public void SendMessageFromUI(string msg)
