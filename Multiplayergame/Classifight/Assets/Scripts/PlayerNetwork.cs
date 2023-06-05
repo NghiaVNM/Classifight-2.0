@@ -27,6 +27,12 @@ public class PlayerNetwork : NetworkBehaviour
     private bool isFlipped = false; // Biến để theo dõi trạng thái quay của nhân vật
     private Vector3 hitBoxOriginalPosition;
     private BoxCollider2D boxColl;
+
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource deathSoundEffect;
+    [SerializeField] private AudioSource moveSoundEffect;
+    [SerializeField] private AudioSource attackSoundEffect;
+    [SerializeField] private AudioSource hurtEffect;
     private void Start()
     {
         if (IsServer)
@@ -67,6 +73,7 @@ public class PlayerNetwork : NetworkBehaviour
         checkJump = Input.GetKeyDown(KeyCode.W);
         if (checkJump&&IsGrounded())
         {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             state = MovementState.jumping;
         }
@@ -74,11 +81,13 @@ public class PlayerNetwork : NetworkBehaviour
         {
             if (dirX > 0f)
             {
+                moveSoundEffect.Play();
                 state = MovementState.running;
                 ServerFlipServerRpc(false);
             }
             else if (dirX < 0f)
             {
+                moveSoundEffect.Play();
                 state = MovementState.running;
                 ServerFlipServerRpc(true);
             }
@@ -98,7 +107,8 @@ public class PlayerNetwork : NetworkBehaviour
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.J))
-            {
+            {   
+                attackSoundEffect.Play();
                 ServerAttackServerRpc();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -132,7 +142,7 @@ public class PlayerNetwork : NetworkBehaviour
     {
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
-
+        hurtEffect.Play();
         if (currentHealth <= 0)
         {
             Die();
@@ -141,6 +151,7 @@ public class PlayerNetwork : NetworkBehaviour
 
     async void Die()
     {
+        deathSoundEffect.Play();
         Debug.Log("Player Died");
         animator.SetTrigger("Hurt");
         animator.SetBool("isDead", true);
