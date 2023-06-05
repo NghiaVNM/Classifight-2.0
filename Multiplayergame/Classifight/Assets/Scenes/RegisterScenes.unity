@@ -950,6 +950,8 @@ GameObject:
   - component: {fileID: 715439396}
   - component: {fileID: 715439395}
   - component: {fileID: 715439394}
+  - component: {fileID: 715439397}
+  - component: {fileID: 715439398}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1022,9 +1024,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 207017868}
-        m_TargetAssemblyTypeName: RegisterLogin, Assembly-CSharp
-        m_MethodName: LoginEvent
+      - m_Target: {fileID: 715439397}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: SignIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1072,6 +1074,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715439392}
   m_CullTransparentMesh: 1
+--- !u!114 &715439397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715439392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7aac9b5bf95e54ab9a8c83ef66586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 715439398}
+  ButtonSoundEffect: {fileID: 1422925147}
+--- !u!114 &715439398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715439392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3252017f65194a8567ae17cbafa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &728125014
 GameObject:
   m_ObjectHideFlags: 0

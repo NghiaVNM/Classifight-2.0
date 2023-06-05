@@ -712,7 +712,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 742688972}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: SignIn
+        m_MethodName: Begin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 742688973}
-  ButtonSoundEffect: {fileID: 0}
+  ButtonSoundEffect: {fileID: 1161366210}
 --- !u!114 &742688973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,7 +1577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 742688972}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: con
+        m_MethodName: connectt
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -3619,6 +3619,7 @@ GameObject:
   - component: {fileID: 1674062416}
   - component: {fileID: 1674062415}
   - component: {fileID: 1674062418}
+  - component: {fileID: 1674062419}
   m_Layer: 5
   m_Name: Back(button)
   m_TagString: Untagged
@@ -3753,8 +3754,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7aac9b5bf95e54ab9a8c83ef66586f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 0}
-  ButtonSoundEffect: {fileID: 0}
+  ui: {fileID: 1674062419}
+  ButtonSoundEffect: {fileID: 1628322538}
+--- !u!114 &1674062419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674062413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3252017f65194a8567ae17cbafa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1712632120
 GameObject:
   m_ObjectHideFlags: 0

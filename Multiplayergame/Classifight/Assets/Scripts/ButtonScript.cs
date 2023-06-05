@@ -50,8 +50,23 @@ public class ButtonScript : MonoBehaviour
         SceneManager.LoadScene("ChooseMap");
     }
 
-    public void con()
+    public void Login()
+    {
+        SceneManager.LoadScene("LoginScenes");
+    }
+
+    public void Begin()
+    {
+        SceneManager.LoadScene("Begin");
+    }
+
+    public void connectt()
     {
         ui.ConnectToServer();
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
