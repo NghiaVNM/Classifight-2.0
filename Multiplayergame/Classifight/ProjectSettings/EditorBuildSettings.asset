@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChooseMap.unity
     guid: 030eedfa0b196a246b16ff54d5397f28
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LoginScenes.unity
     guid: 7653484ed99c06c478867d56a7d5cd1b
   - enabled: 1
