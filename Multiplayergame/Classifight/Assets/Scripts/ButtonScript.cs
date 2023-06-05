@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ButtonScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] private AudioSource ButtonSoundEffect;
     void Start()
     {
         
@@ -18,26 +19,32 @@ public class ButtonScript : MonoBehaviour
     }
 
     public void Training() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("TrainingScene");
     }
 
     public void Setting() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("SettingMenu");
     }
 
     public void Menu() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("Menu");
     }
 
     public void SignIn() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("LoginScenes");
     }
 
     public void SkyBlock() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("SkyBlock");
     }
 
     public void ChoosingMap() {
+        ButtonSoundEffect.Play();
         SceneManager.LoadScene("ChooseMap");
     }
 }

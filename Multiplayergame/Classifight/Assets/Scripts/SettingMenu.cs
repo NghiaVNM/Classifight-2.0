@@ -9,6 +9,7 @@ public class SettingMenu : MonoBehaviour
     public AudioMixer audioMixer;
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
+    [SerializeField] private AudioSource buttonSound;
 
     void Start()
     {
@@ -33,22 +34,26 @@ public class SettingMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
+        buttonSound.Play();
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void SetVolume(float volume)
     {
+        buttonSound.Play();
         audioMixer.SetFloat("volume", volume);
     }
 
     public void SetQuality(int qualityIndex)
     {
+        buttonSound.Play();
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     public void SetFullScreen(bool isfullScreen)
     {
+        buttonSound.Play();
         Screen.fullScreen = isfullScreen;
     }
 }

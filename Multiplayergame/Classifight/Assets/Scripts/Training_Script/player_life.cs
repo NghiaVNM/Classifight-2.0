@@ -10,6 +10,8 @@ public class player_life : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar1 healthBar;
+    [SerializeField] private AudioSource soundDie;
+    
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,11 +27,13 @@ public class player_life : MonoBehaviour
         {
             currentHealth = 0;
             healthBar.SetHealth(currentHealth);
+            
             Die();
         }
     }
     private void Die()
     {
+        soundDie.Play();
         rg.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Death");
     }
